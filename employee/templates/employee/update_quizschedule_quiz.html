@@ -1,0 +1,32 @@
+{% extends 'employee/dashboard.html' %}
+
+{%block content%}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+  
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+
+    <div class="container">
+        <h1 class="text-center"><u>Update Quiz Schedule</u></h1>
+
+        <form method="POST" enctype="multipart/form-data">
+            <!-- csrf token -->
+            {% csrf_token %}
+    
+            <!-- for getting form as paragraf
+            {{form.as_p}} -->
+    
+            <table class="table">
+                
+                {{form.as_table}}
+            </table>
+            
+            <!-- form submit button -->
+            <input type="submit" value='Update Schedule' class="btn btn-outline-info"/>
+        </form>
+    </div>
+
+    
+
+    {%endblock%}

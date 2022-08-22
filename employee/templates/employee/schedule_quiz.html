@@ -1,0 +1,64 @@
+{% extends 'employee/dashboard.html' %}
+
+{%block content%}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+  
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+
+    <div class="container">
+        <h1 class="text-center"><u>Schedule Quiz</u></h1>
+
+        <form method="POST" enctype="multipart/form-data">
+            <!-- csrf token -->
+            {% csrf_token %}
+    
+            <!-- for getting form as paragraf
+            {{form.as_p}} -->
+    
+            <table class="table">
+                
+                {{form.as_table}}
+            </table>
+            
+            <!-- form submit button -->
+            <input type="submit" value='Schedule Quiz' class="btn btn-outline-info"/>
+        </form>
+    </div>
+
+    <div class="container mt-5">
+        <table id="example" class="table table table-responsive" style="width:100%">
+            <thead>
+                <th>S.no.</th>
+                <th>Quiz By</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Subject</th>
+                <th>Action</th>
+                
+            </thead>
+
+            <tbody>
+            {%for i in QuizSchedules%}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.quiz_by}}</td>
+                    <td>{{i.starttime}}</td>
+                    <td>{{i.endtime}}</td>
+                    <td>{{i.subject}}</td>
+                    <td><a href="/update_quiz_schedule/{{i.id}}/" class="btn btn-warning">Update</a> &nbsp&nbsp <a href="/delete_quiz_schedule/{{i.id}}/" class="btn btn-danger">Delete</a></td>
+                </tr>
+            {%endfor%}
+        </tbody>
+        </table>
+        
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+        } );
+        
+        </script>
+
+    {%endblock%}

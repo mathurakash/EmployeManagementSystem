@@ -1,0 +1,36 @@
+{% extends 'employee/index.html' %}
+
+{%block body%}
+<div class="main_div" style="display: flex;justify-content: center;">
+    
+    <form method="POST" enctype="multipart/form-data" style="width:fit-content;margin-top: 5%; padding: 30px;background: yellowgreen; justify-items: center; justify-content: center;">
+        <!-- csrf token -->
+        <img class="mx-5" src="https://bluethink.in/wp-content/uploads/2018/04/cropped-bluethink_Logo-1.png" alt="">
+        {% csrf_token %}
+        <h1 class="text-center text-primary">Register Form</h1>
+        <!-- for getting form as paragraf
+        {{form.as_p}} -->
+
+        <table class="table table-bordered" style="background: yellowgreen;">
+            {{form.as_table}}
+        </table>
+        {% comment %} <label> Enter Email</label>
+        <input type="email" >
+        <label> Enter Password</label>
+        <input type="password" > {% endcomment %}
+
+        
+        <!-- form submit button -->
+        <input type="submit" class="btn btn-success form-control"  value='Register' />
+
+        <a href="{% url 'employee:index'%}" class="btn btn-primary form-control my-2"> Login Here!</a></br>
+        <!-- <a href="#" class="btn btn-primary form-control my-2"> Forgot Password!</a> -->
+
+    </form>
+
+
+</div>
+
+
+
+{%endblock%}

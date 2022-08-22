@@ -1,0 +1,55 @@
+{% extends 'employee/dashboard.html'%}
+
+{% block content%}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+  
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+
+<style>
+    .month{
+        border: 1px solid black !important;
+        width: -webkit-fill-available  !important;
+    }
+    tr,td,th{
+        border: 1px solid black;
+    }
+</style>
+<div class="container">
+    <div class="row">
+    <h1><u>Project Report Section</u></h1>
+    <div class="col-md-12">
+        <form method="POST" class="form-control" enctype="multipart/form-data">
+            <!-- csrf token -->
+            {% csrf_token %}
+    
+            <!-- for getting form as paragraf
+            {{form.as_p}} -->
+            <div class="form-group my-2">
+            <label for="project" style="font-weight: bold;">Select Project :</label>
+            <select id="project" class="form-control" name="project">
+            
+                {%for i in data%}
+                <option value="{{i}}">{{i}}</option>
+                {%endfor%}
+                </select>
+            </div>
+            
+            <table class="table">
+                
+                {{form.media}}
+                {{form.as_table}}
+            </table>
+            
+            <!-- form submit button -->
+            <input type="submit" value='Submit Report' class="btn btn-outline-info"/>
+        </form>
+    </div>
+    
+</div>
+</div>
+
+
+
+{%endblock%}

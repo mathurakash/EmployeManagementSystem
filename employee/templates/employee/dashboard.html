@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="https://bluethink.in/wp-content/uploads/2018/04/cropped-bluethink_Logo-1.png">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+        
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+  
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+
+        <title>BlueThink</title>
+
+    <style>
+        body {
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+        }
+
+        html {
+            height: -webkit-fill-available;
+        }
+
+        main {
+            display: flex;
+            flex-wrap: nowrap;
+            height: 100vh;
+            height: -webkit-fill-available;
+            max-height: 100vh;
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
+
+        .b-example-divider {
+            flex-shrink: 0;
+            width: 1.5rem;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, .1);
+            border: solid rgba(0, 0, 0, .15);
+            border-width: 1px 0;
+            box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+        }
+
+        .bi {
+            vertical-align: -.125em;
+            pointer-events: none;
+            fill: currentColor;
+        }
+
+        .dropdown-toggle {
+            outline: 0;
+        }
+
+        .nav-flush .nav-link {
+            border-radius: 0;
+        }
+
+        .btn-toggle,input{
+            display: inline-flex;
+            align-items: center;
+            padding: .25rem .5rem;
+            font-weight: 600;
+            color: rgba(0, 0, 0, .65);
+            background-color: transparent;
+            border: 0;
+        }
+
+        .btn-toggle:hover,
+        .btn-toggle:focus {
+            color: rgba(0, 0, 0, .85);
+            background-color: #d2f4ea;
+        }
+
+        .btn-toggle::before {
+            width: 1.25em;
+            line-height: 0;
+            content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%280,0,0,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+            transition: transform .35s ease;
+            transform-origin: .5em 50%;
+        }
+
+        .btn-toggle[aria-expanded="true"] {
+            color: rgba(0, 0, 0, .85);
+        }
+
+        .btn-toggle[aria-expanded="true"]::before {
+            transform: rotate(90deg);
+        }
+
+        .btn-toggle-nav a {
+            display: inline-flex;
+            padding: .1875rem .5rem;
+            margin-top: .125rem;
+            margin-left: 1.25rem;
+            text-decoration: none;
+        }
+
+        .btn-toggle-nav a:hover,
+        .btn-toggle-nav a:focus {
+            background-color: #d2f4ea;
+        }
+
+        .scrollarea {
+            overflow-y: auto;
+        }
+
+        .btn-toggle {
+            width: -webkit-fill-available;
+        }
+
+        .btn-toggle-nav a {
+            display: inline-flex;
+            padding: 0.1875rem 0.5rem;
+            margin-top: 0.125rem;
+            margin-left: 1.25rem;
+            text-decoration: none;
+            width: -webkit-fill-available;
+        }
+
+        .fw-semibold {
+            font-weight: 600;
+        }
+
+        .lh-tight {
+            line-height: 1.25;
+        }
+
+        .btn-toggle_no_dropdown::before {
+            display: none !important;
+}
+
+/* STyle for today date */
+.mystyle {
+  width: 100%;
+  padding: 25px;
+  background-color: coral;
+  color: white;
+  font-size: 25px;
+  box-sizing: border-box;
+}
+#calender th{
+    text-align: center !important;
+}
+#calender td{
+    color: red;
+    text-align: center;
+    border-radius: 100% !important;
+    height: 50px !important;
+    width: 50px !important;
+    padding: 16px !important;
+}
+.month{
+        border: 1px solid black !important;
+        width: -webkit-fill-available  !important;
+    }
+    tr,td,th{
+        border: 1px solid black;
+    }
+
+.month th td {
+    text-align: center;
+}
+.month th.month{
+    border: 1px solid black !important;
+    width: -webkit-fill-available !important;
+    height: 130px;
+    background-color: orange;
+    text-align: center;
+    color: white;
+    font-size: x-large;
+    font-family: serif;
+}
+    </style>
+</head>
+
+<body  onload = "JavaScript:AutoRefresh(5000);">
+
+<!--------------------------- NAVBAR SECTION -------------------------------------->
+    <div class="topbar">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/dashboard/"><img class="mx-1" class="rounded-circle" src="https://bluethink.in/wp-content/uploads/2018/04/cropped-bluethink_Logo-1.png" alt=""></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+
+                    </ul>
+
+                    <ul class=" navbar-nav my-2 my-lg-0">
+
+
+
+                        <li class="nav-item dropdown mr-5">
+                            <img src="{{img.image.url}}" alt="" height="70px" width="70px" style="border:1px solid black;border-radius: 50%;"/>
+                        </li>
+
+                        <li class="nav-item dropdown mr-5">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                {{request.session.user_log.fname}}
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="margin-left: -50px;">
+                                {%if emp%}
+                                <li><a class="dropdown-item" href="{% url 'employee:profile' emp.id%}">My Profile</a></li>
+                                {%else%}
+                                <li><a class="dropdown-item" href="{% url 'employee:profile' request.session.user_log.id%}">My Profile</a></li>
+                                {%endif%}
+                                <li><a class="dropdown-item" href="#">Settings</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                {%if emp%}
+                                <li>
+                                    <a class="dropdown-item" aria-current="page"
+                                        href="{% url 'employee:logout' emp.id %}">Logout</a>
+                                </li>
+                                {%else%}
+                                <li>
+                                    <a class="dropdown-item" aria-current="page"
+                                        href="{% url 'employee:logout' request.session.user_log.id %}">Logout</a>
+                                </li>
+                                {%endif%}
+                            </ul>
+                        </li>
+
+
+
+                    </ul>
+
+
+                </div>
+            </div>
+        </nav>
+        </div>
+
+<!--------------------------- SIDEBAR SECTION  AND MAIN BODY------------------------------------>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2" style="padding-left: 0px !important;">
+                    <div class="flex-shrink-0 p-3 bg-light" style="height: 700px;">
+                        <ul class="list-unstyled ps-0">
+                            {% if img.emp_status == 'Admin' %}
+                            <li class="mb-1">
+                                <button class="btn btn-toggle align-items-center rounded collapsed"
+                                    data-bs-toggle="collapse" data-bs-target="#employee_details" aria-expanded="false">
+                                    Employees Detail
+                                </button>
+                                <div class="collapse" id="employee_details">
+                                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                        <li><a href="/all_employees/" class="link-dark rounded">All Employees</a></li>
+                                        
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="border-top my-3"></li>
+                            {%else%}
+                            {%endif%}
+                            <li class="mb-1">
+                                <button class="btn btn-toggle align-items-center rounded collapsed"
+                                    data-bs-toggle="collapse" data-bs-target="#project_management"
+                                    aria-expanded="false">
+                                    Project Management
+                                </button>
+                                <div class="collapse" id="project_management">
+                                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                        {% if img.emp_status == 'Admin' %}
+                                        <li><a href="/assign_project/" class="link-dark rounded">Assign New Project</a></li>
+                                        {%endif%}
+                                        <li><a href="/assign_project_to_me/" class="link-dark rounded">Assign Project To Me</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="border-top my-3"></li>
+                            <li class="mb-1">
+                                <button class="btn btn-toggle align-items-center rounded collapsed"
+                                    data-bs-toggle="collapse" data-bs-target="#report_management" aria-expanded="false">
+                                    Report Management
+                                </button>
+                                <div class="collapse" id="report_management">
+                                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                        <li><a href="/create_project_report/" class="link-dark rounded">Create Project Reports</a></li>
+                                        <li><a href="/project_report_list/" class="link-dark rounded">Project Reports List</a></li>
+                                        <li><a href="/to_do/" class="link-dark rounded">Going To Work today</a></li>
+                                        <!-- <li><a href="#" class="link-dark rounded">daily Work Listing</a></li> -->
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="border-top my-3"></li>
+                            <li class="mb-1">
+                                <button class="btn btn-toggle align-items-center rounded collapsed"
+                                    data-bs-toggle="collapse" data-bs-target="#attandance_management" aria-expanded="false">
+                                    Attendance 
+                                </button>
+                                <div class="collapse" id="attandance_management">
+                                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                        <li><a href="/attendance/" class="link-dark rounded">View Attendance</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="border-top my-3"></li>
+                            <li class="mb-1">
+                                <button class="btn btn-toggle align-items-center rounded collapsed"
+                                    data-bs-toggle="collapse" data-bs-target="#leave_management" aria-expanded="false">
+                                    Leave Management
+                                </button>
+                                <div class="collapse" id="leave_management">
+                                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                        {% if img.emp_status == 'Admin' %}
+                                        <li><a href="/leave_approval/" class="link-dark rounded">Approved Leaves</a></li>
+                                        {%endif%}
+                                        <li><a href="/generate_leave/" class="link-dark rounded">Generate Leave</a></li>
+                                        <li><a href="/leave_list/" class="link-dark rounded">Leave List</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="border-top my-3"></li>
+                            <li class="mb-1">
+                                <button class="btn btn-toggle align-items-center rounded collapsed"
+                                    data-bs-toggle="collapse" data-bs-target="#Salery_Slip" aria-expanded="false">
+                                    Salery Slip Generation
+                                </button>
+                                <div class="collapse" id="Salery_Slip">
+                                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                        {% if img.emp_status == 'Admin' %}
+                                        <li><a href="/add_salary_details/" class="link-dark rounded">Add Salary Details</a></li>
+                                        {%endif%} 
+                                        
+                                        <li><a href="/generate_salary_slip/" class="link-dark rounded">Generate Salary Slip</a></li>
+                                        
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="border-top my-3"></li>
+                            <li class="mb-1">
+                                <button class="btn btn-toggle align-items-center rounded collapsed"
+                                    data-bs-toggle="collapse" data-bs-target="#break_timings" aria-expanded="false">
+                                    Break Timings
+                                </button>
+                                <div class="collapse" id="break_timings">
+                                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                        <li><a href="/break_timings/" class="link-dark rounded">Break Timings</a></li>
+                                        
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="border-top my-3"></li>
+                            <li class="mb-1">
+                                <button class="btn btn-toggle align-items-center rounded collapsed"
+                                    data-bs-toggle="collapse" data-bs-target="#technology_stack" aria-expanded="false">
+                                    Technology Stack
+                                </button>
+                                <div class="collapse" id="technology_stack">
+                                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                        <li><a href="/technology_stack/" class="link-dark rounded">Technology Stack</a></li>
+                                        
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="border-top my-3"></li>
+                            <li class="mb-1">
+                                <button class="btn btn-toggle align-items-center rounded collapsed"
+                                    data-bs-toggle="collapse" data-bs-target="#fun_management" aria-expanded="false">
+                                    Fun Section
+                                </button>
+                                <div class="collapse" id="fun_management">
+                                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                        <li><a href="/image_section/" class="link-dark rounded">Image Section</a></li>
+                                        
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="border-top my-3"></li>
+                            <li class="mb-1">
+                                <button class="btn btn-toggle align-items-center rounded collapsed"
+                                    data-bs-toggle="collapse" data-bs-target="#test_section" aria-expanded="false">
+                                    Test Section
+                                </button>
+                                <div class="collapse" id="test_section">
+                                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                        {% if img.emp_status == 'Admin' %}
+                                        <li><a href="/schedule_quiz/" class="link-dark rounded">Schedule Quiz</a></li>
+                                        <li><a href="/add_questions/" class="link-dark rounded">Add Questions</a></li>
+                                        <li><a href="/all_results/" class="link-dark rounded">Results</a></li>
+                                        {%endif%}
+                                        <li><a href="/test_window/" class="link-dark rounded">Dummy Test</a></li>
+                                        <li><a href="/my_results/{{img.id}}/" class="link-dark rounded">My Results</a></li>
+                                        
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+<!----------------------------- MAIN BODY START ------------------------------------------>
+
+                <div class="col-md-10 bg-light my-3 mx-auto  px-5 " style="overflow-y:scroll; height: 670px;" >
+                    
+                    {% block content %}
+                    <div class="container">
+                        <div class="row">
+                        <h1><u>Dashboard</u></h1>
+                        <div class="col-md-9">
+                            <div class="row" style="background: chartreuse;">
+                                <div class="col-md-6">
+                                    <h3>Date : <span><h6>{{login_date}}</h6></span></h3>
+                                </div>
+                                <div class="col-md-6" style="float: right;text-align: end;">
+                                    <h3>Login Time : <span><h6>{{login_time.0|slice:":8"}}</h6></span></h3>
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                
+                                <div class="col-md-6" style="border:1px solid black;">
+                                    <h4 class=" text-center text-white px-1 py-1" style="background-color:darkblue"><u>Things To do On daily Basis</u></h4>
+                                    <ul>
+                                        <li>Log your daily activities.</li>
+                                        <li>Check your E-Mail on daily basis.</li>
+                                        <li>Enter report before starting work in "Going to work Today" section.</li>
+                                        <li>Enter report at the End of dat in "Create Project Report" section.</li>
+                                    </ul>
+                                </div>
+
+                                <div class="col-md-6 mr-2" style="border:1px solid black;">
+                                    <h4 class=" text-center text-white px-1 py-1"  style="background-color:darkblue"><u>Quotes</u></h4>
+                                    <h4 class="my-5 text-center text-align-center"  style="color:darkblue">"I don’t need to believe in God to believe in myself."</h4>
+                                </div>
+                            </div>
+
+                           
+                            
+
+                          
+                        </div>
+                    
+                        <div class="col-md-3">
+                            <div>
+                            {{calender|safe}}
+                                </div>
+                                
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <h3 style="background-color: aqua;">Birthday and Aniversary</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6 style="color:darkblue">This Month Birthday</h6>
+                                {%if thismonthbirthday%}
+                                {% for i in thismonthbirthday%}
+                                {% if i.dob.day >= todaydate.day%}
+                                <table id="example" class="table table table-responsive" style="width:100%;height: 125px; overflow-y: scroll;">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Date</th>
+                                    </tr>
+                                    
+                                   
+                                        {% if i.dob.day == todaydate.day%}
+                                        <tr class="bg-warning">
+                                            <td>{{i.fname}}</td>
+                                            <td>{{i.dob}}</td>
+                                        </tr>
+                                        {%else%}
+                                        <tr >
+                                            <td>{{i.fname}}</td>
+                                            <td>{{i.dob}}</td>
+                                        </tr>
+                                        {%endif%}
+                                    
+                                    
+                                </table>
+                                {%else%}
+                                <p class="text-danger">No birthday in this month.........</p>
+                                {%endif%}
+                                {%endfor%}
+                                {%else%}
+                                    
+                                    {%endif%}
+                                <!-- <p>No result to show now...</p> -->
+                            </div>
+                            <div class="col-md-6">
+                                <h6 style="color:darkblue">Next Month birthday</h6>
+                                {%if nextmonthbirthday%}
+                                <table id="example1" class="table table table-responsive" style="width:100%;height: 125px; overflow-y: scroll;">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Date</th>
+                                        
+                                    </tr>
+                                    
+                                    {% for i in nextmonthbirthday%}
+                                    <tr>
+                                        <td>{{i.fname}}</td>
+                                        <td>{{i.dob}}</td>
+                                    </tr>
+                                    {%endfor%}
+                                    
+                                </table>
+                                {%else%}
+                                    <p class="text-danger">No birthday in next month.........</p>
+                                    {%endif%}
+                                <!-- <p>No result to show now...</p> -->
+                            </div>
+                            <div class="col-md-6">
+                                <h6 style="color:darkblue">This Month Work Aniversary</h6>
+                                {%if thismonthaniversary%}
+                                <table id="example2" class="table table table-responsive" style="width:100%;height: 125px; overflow-y: scroll;">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Joining Date</th>
+                                    </tr>
+                                    
+                                    {% for i in thismonthaniversary%}
+                                    {% if i.joiningdate.day >= todaydate.day and i.joiningdate.year < todaydate.year%}
+                                    {% if i.joiningdate.day == todaydate.day%}
+                                    <tr class="bg-warning">
+                                        <td>{{i.fname}}</td>
+                                        <td>{{i.joiningdate}} ({{i.workeniversary}}st Work anivesary)</td>
+                                    </tr>
+                                    {%else%}
+                                    <tr>
+                                        <td>{{i.fname}}</td>
+                                        <td>{{i.joiningdate}}</td>
+                                    </tr>
+                                    {%endif%}
+                                    {%endif%}
+                                    {%endfor%}
+
+                                </table>
+                                {%else%}
+                                <p class="text-danger">No Work Aniversary in this month.........</p>
+                                {%endif%}
+                            </div>
+                            <div class="col-md-6">
+                                <h6 style="color:darkblue">Next Month work Aniversary</h6>
+                                {%if nextmonthaniversary%}
+                                <table id="example3" class="table table table-responsive" style="width:100%;height: 125px; overflow-y: scroll;">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Joining Date</th>  
+                                    </tr>
+                                    
+                                    {% for i in nextmonthaniversary%}
+
+                                    <tr>
+                                        <td>{{i.fname}}</td>
+                                        <td>{{i.joiningdate}}</td>
+                                    </tr>
+
+                                    {%endfor%}
+                                    
+                                </table>
+                                {%else%}
+                                    <p class="text-danger">No Work Aniversary in next month.........</p>
+                                    {%endif%}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    </div>
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+
+        
+
+        <script>
+           var today = new Date();
+           date=today.getDate() 
+           console.log(date)
+            $(".month td ").each(function() {
+            var value = $(this).text();
+            // var class_name = $(this).class(); 
+            console.log(value);
+           
+            if (value==date) {
+               console.log("yes")
+               console.log(value);
+               $(this).css("backgroundColor", "greenyellow" );
+               $(this).css("color", "black" );
+               $(this).css("font-weight", "bold" );
+
+            }
+            else{
+                
+            }
+
+        })
+
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
+    
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#example1').DataTable();
+        } );
+        
+        </script>
+        <script>
+            $(document).ready(function() {
+                $('#example2').DataTable();
+            } );
+            
+            </script>
+            <script>
+                $(document).ready(function() {
+                    $('#example3').DataTable();
+                } );
+                
+                </script>
+
+
+</body>
+
+</html>

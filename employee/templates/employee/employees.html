@@ -1,0 +1,71 @@
+{% extends 'employee/dashboard.html'%}
+
+{% block content%}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+  
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+
+<style>
+    .month{
+        border: 1px solid black !important;
+        width: -webkit-fill-available  !important;
+    }
+    tr,td,th{
+        border: 1px solid black;
+    }
+</style>
+<div class="container">
+
+    <div class="row">
+        <h3><u> Employees Details </u></h3>
+        <table id="example" class="table table table-responsive" style="width:100%">
+            <thead>
+                <th>Sno.</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email </th>
+                <th>Joining Date </th>
+                <th>Date Of Birth</th>
+                <th>Phone</th>
+                <th>Image</th>
+                <th>Employee Status</th>
+                <th>Action</th>
+                
+            </thead>
+            <tbody>
+                {%for i in allemp%}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{i.fname}}</td>
+                        <td>{{i.lname}}</td>
+                        <td>{{i.email}}</td>
+                        <td>{{i.joiningdate}}</td>
+                        <td>{{i.dob}}</td>
+                        <td>{{i.phone}}</td>
+                        <td><img src="{{i.image.url}}" height="70px" width="70px" style="border:1px solid black;border-radius: 50%;"></td>
+                        <td>{{i.emp_status}}</td>
+                        <td><a href="/update_employee/{{i.id}}" class="btn btn-warning">Update</a>&nbsp&nbsp<a href="/delete_employee/{{i.id}}" class="btn btn-danger">Delete</a></td>
+                    </tr>
+                {%endfor%}
+            </tbody>
+
+        </table>
+
+    </div>
+    </div>
+    <div class="col-md-3">
+        {{cal|safe}}
+    </div>
+</div>
+</div>
+
+
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
+    
+    </script>
+{%endblock%}

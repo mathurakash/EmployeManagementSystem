@@ -1,0 +1,43 @@
+{% extends 'employee/dashboard.html'%}
+
+{% block content%}
+
+<div class="main_div">
+    <h1>My Profile</h1>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <form method="POST" enctype="multipart/form-data">
+                    <!-- csrf token -->
+                    {% csrf_token %}
+            
+                    <!-- for getting form as paragraf
+                    {{form.as_p}} -->
+            
+                    <table class="table">
+                        {{form.as_table}}
+                    </table>
+                    {% comment %} <label> Enter Email</label>
+                    <input type="email" >
+                    <label> Enter Password</label>
+                    <input type="password" > {% endcomment %}
+            
+                    
+                    <!-- form submit button -->
+                    <input type="submit" value='Update Profile' class="btn btn-outline-info"/>
+                </form>
+            </div>
+            <div class="col-md-6" style="display: flex;
+            justify-content: center;">
+                <img src="{{img.image.url}}" class="rounded" alt="" srcset="" style="width: -webkit-fill-available;    border-radius: 15.25rem!important;
+                height: 337px;width: 337px;">
+            </div>
+        </div>
+    </div>
+   
+
+
+</div>
+
+{%endblock%}

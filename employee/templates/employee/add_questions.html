@@ -1,0 +1,27 @@
+{% extends 'employee/dashboard.html' %}
+
+{%block content%}
+    <div class="container">
+        <h1 class="text-center"><u>Add Questions</u></h1>
+
+        <form method="POST" enctype="multipart/form-data">
+            <!-- csrf token -->
+            {% csrf_token %}
+    
+            <!-- for getting form as paragraf
+            {{form.as_p}} -->
+    
+            <table class="table">
+                {{form.media}}
+                {{form.as_table}}
+            </table>
+            
+            <!-- form submit button -->
+            <input type="submit" value='Add Question' class="btn btn-outline-info"/>
+        </form>
+    </div>
+
+
+
+
+    {%endblock%}

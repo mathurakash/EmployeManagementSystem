@@ -1,0 +1,106 @@
+{% extends 'employee/dashboard.html'%}
+
+{% block content%}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+  
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+
+<style>
+    .month{
+        border: 1px solid black !important;
+        width: -webkit-fill-available  !important;
+    }
+    tr,td,th{
+        border: 1px solid black;
+    }
+</style>
+<div class="container">
+
+    <div class="row">
+        <h3><u> All Pending Leaves details </u></h3>
+        <table id="example" class="table table table-responsive" style="width:100%">
+            <thead>
+                <th>Sno.</th>
+                <th>Employee Name</th>
+                <th>Reason</th>
+                <th>From </th>
+                <th>To </th>
+                <th>Status</th>
+                <th>Rejection Reason</th>
+                <th>Action</th>
+                
+            </thead>
+            <tbody>
+                {%for i in leaves%}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{i.employee}}</td>
+                        <td>{{i.reason}}</td>
+                        <td>{{i.fromdate}}</td>
+                        <td>{{i.todate}}</td>
+                        {%if i.status == "Pending"%}
+                        <td class="bg-warning">{{i.status}}</td>
+                        {%elif i.status == "Rejected"%}
+                        <td class="bg-danger">{{i.status}}</td>
+                        {%else%}
+                        <td class="bg-success">{{i.status}}</td>
+                        {%endif%}
+                        <td>{{i.rejectionreason}}</td>
+                        {%if i.status == "Pending"%}
+                        <td><!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{i.id}}">
+                              Rejection Reason
+                            </button>
+                            
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal{{i.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Rejection reason</h5>
+                                    
+                                  </div>
+                                  <div class="modal-body">
+                                    <form method="POST">
+                                        {%csrf_token%}
+                                        <input type="hidden" value="{{i.id}}" name="leaveid">
+                                        <div class="form-control">
+                                            <label for="reason">Enter Reason For rejection</label>
+                                            
+                                            <input type="input" name="textarea">
+                                        </div>
+                                        <input type="submit" class="btn btn-primary mt-3 " value="Reject">
+                                    </form>
+                                  </div>
+                                  
+                                </div>
+                              </div>
+                            </div>
+                            <a href="/reject/{{i.id}}/" class="btn btn-danger">Reject</a>&nbsp&nbsp<a href="/accept/{{i.id}}/" class="btn btn-success">Appecpt</a></td>
+                        {%else%}
+                        <td>{{i.status}}</td>
+                        {%endif%}
+                    </tr>
+                {%endfor%}
+            </tbody>
+
+        </table>
+
+    </div>
+    </div>
+    <div class="col-md-3">
+        {{cal|safe}}
+    </div>
+</div>
+</div>
+
+
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
+    
+    </script>
+{%endblock%}

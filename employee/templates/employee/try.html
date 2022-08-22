@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+      <div>
+        <input type="checkbox" name="radio" id="radio">
+      
+        <button class="btn_style" id="ch1">Add 1</button>
+        <!-- <button class="btn_style" id="flip-ch1">Add 2</button> -->
+      
+      </div>
+
+      <script>
+        $(document).ready(function() {
+        $('#flip-ch1').hide();
+        $('#radio').on('change', function() {
+          if ($('#radio').is(':checked')) {
+            // $('#flip-ch1').show();
+            $('#ch1').hide();
+          } else {
+            // $('#flip-ch1').hide();
+            $('#ch1').show();
+          }
+        });
+      });
+      </script>
+</body>
+</html>

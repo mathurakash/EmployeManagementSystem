@@ -1,0 +1,176 @@
+{% extends 'employee/dashboard.html'%}
+
+{% block content%}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<style>
+    .month{
+        border: 1px solid black !important;
+        width: -webkit-fill-available  !important;
+    }
+    tr,td,th{
+        border: 1px solid black;
+    }
+</style>
+{% load static %}
+<div class="container">
+    <div class="row" >
+    <h1><u>Generate Salary Slip</u></h1>
+
+        {% if messages %}
+{% for message in messages %}
+    <small {% if messages.tags%} class="{{message.tags}}" {%endif%}>{{message}}</small>
+{% endfor %}
+{% endif %}
+    <div class="container">
+        
+    <form method = 'POST' class="col s12 form-control" enctype="multipart/form-data">
+ 
+        {% csrf_token %}
+ 
+    <div class="form-group">
+        <label><h3 for="date">SELECT MONTH :</h3></label>
+        <select id="month" class="form-control" name="month">
+            <option value="January">January</option>
+            <option value="February">February</option>
+            <option value="March">March</option>
+            <option value="April">April</option>
+            <option value="May">May</option>
+            <option value="June">June</option>
+            <option value="July">July</option>
+            <option value="August">August</option>
+            <option value="September">September</option>
+            <option value="October">October</option>
+            <option value="November">November</option>
+            <option value="December">December</option>
+        </select>
+    </div>
+        <input type="submit" class="btn btn-outline-info my-2" value="Generate Slip" >
+    </form>
+    </div>
+    <hr class="my-2">
+    
+    {%if month%}
+    <button class="btn btn-warning mt-5" onclick="printDiv('printableArea')">Print Slip</button>
+    <div class="container"  id="printableArea">
+    
+    <div class="container border px-5 py-5">
+        
+        <h3 class="text-center">BlueThink Consulting Pvt. Ltd.</h3>
+        <p class="text-center"> Sector-2 NEAR Sector-15 Metro Station</p>
+        <p class="text-center"> Salary slip for the month of {{month}}</p>
+
+    <div class="row">
+        <table class="table mx-auto px-auto " style="border:none;">
+            <tr>
+                <th>
+                    <p>Noida 201301,</br>UP,INDIA</p>
+                </th>
+                <th style="text-align: end;">
+                    <h6>Slip Number</h6></br>
+                    <p> Bluethink-{{emp.fname}}-{{month}}-12345</p>
+                </th>
+            </tr>
+        </table>
+
+    </div>
+    <div class="row">
+        <table class="text-left">
+            <tr>
+                <th>NAME:</th>
+                <td>{{emp.fname}} {{emp.lname}}</td>
+            </tr>
+            <tr>
+                <th>EMAIL:</th>
+                <td>{{emp.email}}</td>
+            </tr>
+            <tr>
+                <th>CONTACT:</th>
+                <td>{{emp.phone}}</td>
+            </tr>
+            <tr>
+                <th>DOB:</th>
+                <td>{{emp.dob}}</td>
+            </tr>
+        </table>
+    </div>
+<hr>
+
+    <div class="row">
+        <h4>SALARY DISTRIBUTION</h4>
+        <table id="salarydetail" class="table table-bordered text-left">
+            <tr>
+                <th>EARNING</th>
+                <th>AMOUNT</th>
+                <th>DEDUCTION</th>
+                <th>AMOUNT</th>
+            </tr>
+            <tr>
+                <td>BASIC</td>
+                <td>{{salary.basic}}</td>
+                <td>PF</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>HRA</td>
+                <td>{{salary.hra}}</td>
+                <td>INCODE TAX</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>TA</td>
+                <td>{{salary.ta}}</td>
+                <td>LEAVE DEDUCTION</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>SA</td>
+                <td>{{salary.sa}}</td>
+                <td>OTHER DEDUCTIONS</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <th>TOTAL EARNING</th>
+                <th>{{salary.total}}</th>
+                <th>TOTAL DEDUCTION</th>
+                <th>0</th>
+            </tr>
+        </table>
+    </div>
+<hr>
+    <div>
+        <p>
+            Net Pay for the Month : <span style="font-weight: bold;">25000</span>
+        </p>
+        <h5>Twinty Five Thousand</h5>
+        <p>Transfer to account : <span style="font-weight: bold;">abc12324321432</span></p>
+    </div>
+
+
+
+</div>
+
+<p class="text-center"> NOTE : This is a system generated slip not required any signature</p>
+</div>
+    {%endif%}
+
+
+</div>
+</div>
+
+
+<script>
+    function printDiv(divName) {
+     var printContents = document.getElementById(divName).innerHTML;
+     var originalContents = document.body.innerHTML;
+
+     document.body.innerHTML = printContents;
+
+     window.print();
+
+     document.body.innerHTML = originalContents;
+}
+</script>
+
+
+
+{%endblock%}

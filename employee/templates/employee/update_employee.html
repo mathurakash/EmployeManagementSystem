@@ -1,0 +1,63 @@
+{% extends 'employee/dashboard.html'%}
+
+{% block content%}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+  
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+
+<style>
+    .month{
+        border: 1px solid black !important;
+        width: -webkit-fill-available  !important;
+    }
+    tr,td,th{
+        border: 1px solid black;
+    }
+</style>
+<div class="container">
+
+    <div class="row">
+        <h1><u> Update Employee Details </u></h1>
+        <form method="POST" enctype="multipart/form-data" style="width:fit-content; padding: 30px;background: yellowgreen; justify-items: center; justify-content: center;">
+            <!-- csrf token -->
+            <img class="mx-5" src="https://bluethink.in/wp-content/uploads/2018/04/cropped-bluethink_Logo-1.png" alt="">
+            {% csrf_token %}
+            <h1 class="text-center text-primary">Update Form</h1>
+            <!-- for getting form as paragraf
+            {{form.as_p}} -->
+    
+            <table class="table table-bordered" style="background: yellowgreen;">
+                {{form.as_table}}
+            </table>
+            {% comment %} <label> Enter Email</label>
+            <input type="email" >
+            <label> Enter Password</label>
+            <input type="password" > {% endcomment %}
+    
+            
+            <!-- form submit button -->
+            <input type="submit" class="btn btn-success form-control"  value='Update Details' />
+    
+           
+    
+        </form>
+    
+
+    </div>
+    </div>
+    <div class="col-md-3">
+        {{cal|safe}}
+    </div>
+</div>
+</div>
+
+
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
+    
+    </script>
+{%endblock%}

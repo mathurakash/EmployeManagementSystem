@@ -1,0 +1,93 @@
+{% extends 'employee/dashboard.html' %}
+
+{%block content%}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+    <div class="container">
+        <h1 class="text-center my-3"><u>Read the guidelines carefully....</u></h1>
+    
+        <div class="row " style="background-color:aquamarine">
+            <h6>
+                The following candidates are eligible to appear in GATE 2022 examination</h6>
+        </div>
+        <div class="row">
+            A candidate who is currently studying in the 3rd or higher years of any undergraduate degree program.
+
+A candidate who has already completed any government approved degree program in Engineering / Technology / Architecture / Science / Commerce / Arts is eligible for appearing in the GATE 2022 exam.
+
+However, the candidates who possess certification from any of the professional societies must ensure that those examinations conducted by the societies are approved by MoE/AICTE/UGC/UPSC as equivalent to B.E. / B.Tech. / B.Arch. / B.Planning, etc.
+
+Candidates who have obtained / are pursuing their qualifying degree from countries other than India: Must be currently in the 3rd or higher years or completed their Bachelor’s degree (duration: at least 3 years) in Engineering / Technology / Science / Arts / Commerce.
+        </div>
+    
+        <div class="container">
+            <div class="row">
+                {%if quizSchedules%}
+                {%for i in quizSchedules%}
+                
+                    <div class="col-md-4 mt-5">
+                        <div class="card" style="width: 18rem;">
+                        
+                        <div class="card-body">
+                            <h3 class="card-title text-primary"><u>{{i.subject}}</u></h3>
+                            <p class="card-text"><b>Start Date Time :</b> {{i.starttime}}</p>
+                            <p class="card-text"><b>Start Date Time :</b> {{i.endtime}}</p>
+                            <p>{{datetime.now}}</p>
+                            
+                            {%if results%}
+                                {%for j in results%}
+
+                                    {%if j.subject == i.subject%}
+
+                                    <a href="/action_page/{{j.id}}" class="btn btn-success my-3">Show Result</a>
+                                    
+                                    {%else%}
+                                    {%if todaytime|time >= i.starttime|time and todaytime|time <= i.endtime|time %}
+                                    <a href="/test_start/{{i.id}}" class="btn btn-primary my-3">Start Test</a>
+                                    {%endif%}
+                                    {%endif%}
+
+
+                                {%endfor%}
+                            {%else%}
+                            {%if todaytime|time >= i.starttime|time and todaytime|time <= i.endtime|time %}
+                            <a href="/test_start/{{i.id}}" class="btn btn-primary my-3">Start Test</a>
+                            {%else%}
+                            <button class="btn btn-danger">Not the right Time to start.</button>
+                            {%endif%}
+                            {%endif%}
+                            
+                           
+                        </div>
+                        </div>
+                    </div>
+
+             
+               
+                {%endfor%}
+                {%else%}
+                <h3 class="text-danger">No test scheduled for today</h3>
+                {%endif%}
+            </div>
+        </div>
+        
+
+    </div>
+    <script type = "text/JavaScript">
+        <!--
+           function AutoRefresh( t ) {
+              setTimeout("location.reload(true);", t);
+           }
+        //-->
+     </script>
+
+
+
+<script type = "text/javascript" >  
+    history.pushState(null, null, document.URL);
+    window.addEventListener('popstate', function () {
+        history.pushState(null, null, document.URL);
+    });
+</script> 
+
+    {%endblock%}

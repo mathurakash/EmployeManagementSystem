@@ -1,0 +1,81 @@
+{% extends 'employee/dashboard.html'%}
+
+{% block content%}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+
+<style>
+    .month{
+        border: 1px solid black !important;
+        width: -webkit-fill-available  !important;
+    }
+    tr,td,th{
+        border: 1px solid black;
+    }
+</style>
+<div class="container">
+    <div class="row">
+    <h1><u>Project Section</u></h1>
+    <div class="col-md-9">
+        
+        <form method="POST" enctype="multipart/form-data">
+            <!-- csrf token -->
+            {% csrf_token %}
+    
+            <!-- for getting form as paragraf
+            {{form.as_p}} -->
+    
+            <table class="table">
+                
+                {{form.as_table}}
+            </table>
+            
+            <!-- form submit button -->
+            <input type="submit" value='Assign Project' class="btn btn-outline-info"/>
+        </form>
+        </div>
+        <div class="col-md-3">
+            {{cal|safe}}
+        </div>
+        </div>
+        <div class="row">
+            <table id="example" class="table table table-responsive" style="width:100%">
+                
+                    <tr>
+                    <th>Sno.</th>
+                    <th>Project Name</th>
+                    <th>Company Name</th>
+                    <th>Start Date </th>
+                    <th>End Date</th>
+                    <th>Assign To</th>
+                    <th>Actions</th>
+                </tr>
+                    
+                
+                
+                    {%for i in data%}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{i.name}}</td>
+                            <td>{{i.cname}}</td>
+                            <td>{{i.starttime}}</td>
+                            <td>{{i.endtime}}</td>
+                            <td>{{i.assign_to}}</td>
+                            <td><a href="/delete_project/{{i.id}}/" class="btn btn-danger">Delete</a></td>
+                        </tr>
+                    {%endfor%}
+            
+    
+            </table>
+    
+        </div>
+    </div>
+    
+</div>
+</div>
+
+
+
+{%endblock%}

@@ -1,0 +1,79 @@
+{% extends 'employee/dashboard.html'%}
+
+{% block content%}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+  
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+
+<style>
+    .month{
+        border: 1px solid black !important;
+        width: -webkit-fill-available  !important;
+    }
+    tr,td,th{
+        border: 1px solid black;
+    }
+</style>
+<div class="container">
+    <div class="row">
+    <h1><u>To Do Section</u></h1>
+    <div class="col-md-12">
+        <form method="POST" class="form-control" enctype="multipart/form-data">
+            <!-- csrf token -->
+            {% csrf_token %}
+            
+            <table class="table">
+                
+                {{form.media}}
+                {{form.as_table}}
+            </table>
+            
+            <!-- form submit button -->
+            <input type="submit" value='Add Task' class="btn btn-outline-info"/>
+        </form>
+    </div>
+    </div>
+
+    {%if tasks%}
+    <div class="row mt-3">
+        <table id="example" class="table table table-responsive" style="width:100%">
+            <thead>
+            <tr>
+                <th>S.No.</th>
+                <th>Task</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {%for i in tasks%}
+        
+            {%ifequal i.status "PENDING"%}
+            <tr style="background-color:yellow">
+                <td>{{forloop.counter}}</td>
+                <td>{{i.task}}</td>
+                <td>{{i.status}}</td>
+                <td><a href="/update_task/{{i.id}}/" class="btn btn-success">Complited</a>&nbsp&nbsp<a href="/delete_task/{{i.id}}/" class="btn btn-danger">Remove Task</a></td>
+            </tr>
+            {%else%}
+            <tr style="background-color:green">
+                <td>{{forloop.counter}}</td>
+                <td>{{i.task}}</td>
+                <td>{{i.status}}</td>
+                <td><a href="/update_task/{{i.id}}/" class="btn bg-white" style="pointer-events:none">Complited</a>&nbsp&nbsp<a href="/delete_task/{{i.id}}/" class="btn bg-white" style="pointer-events: none">Remove Task</a></td>
+            </tr>
+            {%endifequal%}
+
+        {%endfor%}
+    </tbody>
+    </table>
+    </div>
+    {%endif%}
+
+</div>
+
+
+
+{%endblock%}

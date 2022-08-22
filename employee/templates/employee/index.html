@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- CSS only -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<style>
+    tr{
+    margin-top:5px;
+
+    }
+    input{
+        background: white;
+    border: none;
+    }
+</style>
+<!-- http://empmgt.bluethink.in/assets/img/bluethink-bg.png -->
+<body style="background-image: url(http://empmgt.bluethink.in/assets/img/bluethink-bg.png); background-position: top;
+background-size: cover; ">
+<!-- <canvas id="c_n9" width="1366" height="403" style="position: fixed; top: 0px; left: 0px; z-index: -1; opacity: 0.5;"></canvas> -->
+
+
+    {%block body%}
+    <div class="main_div" style="display: flex;justify-content: center;">
+        
+        <form method="POST" enctype="multipart/form-data" class="form-control" style="width:fit-content;margin-top: 10%; padding: 30px;background: yellowgreen;">
+        
+        <img class="mx-5" src="https://bluethink.in/wp-content/uploads/2018/04/cropped-bluethink_Logo-1.png" alt="">
+            <h1 class="text-center text-primary my-3" style="font-family: serif;"><u>Login</u></h1>
+            <!-- csrf token -->
+            {% csrf_token %}
+    
+            <!-- for getting form as paragraf
+            {{form.as_p}} -->
+    
+            <table class="form-control my-2" style="background: yellowgreen;">
+                {{form.as_table}}
+            </table>
+
+    
+            
+            <select name="loginfrom" class="form-control my-2">
+                <!-- <option value="Select Login place">Select Login Place</option> -->
+                <option value="From office">Login From Office</option>
+                <option value="From home">Login From Home</option>
+                
+            </select>
+            <!-- form submit button -->
+            <input type="submit" value='Login' class="form-control btn btn-success my-2" />
+
+            <a href="{% url 'employee:register'%}" class="btn btn-primary form-control my-2"> Register Here!</a></br>
+        <a href="#" class="btn btn-primary form-control my-2"> Forgot Password!</a>
+
+        </form>
+
+        
+    </div>
+
+
+
+    {%endblock%}
+
+<!-- <script>
+    //Execute function now
+
+//! is used to tell the javascript engine that this is a function expression, not a function declaration, ()! Operators such as, +, - can achieve this function, but () is the safest
+
+//Add () after! function() {} to call this function immediately
+
+//In this way, you can imitate a private scope, so that when html files refer to multiple js files, they will not cause variable conflicts
+
+! function () {
+
+ 
+
+//canvas element correlation
+
+//Create the canvas element and set the id of the canvas element
+
+var canvas = document.createElement("canvas"),
+
+context = canvas.getContext("2d"),
+
+attr = getAttr();
+
+ 
+
+//Set the related properties of the created canvas
+
+canvas.id = "c_n" + attr.length;
+
+canvas.style.cssText = "position:fixed;top:0;left:0;z-index:" + attr.z + ";opacity:" + attr.opacity;
+
+//Add the canvas element to the body element
+
+document.getElementsByTagName("body")[0].appendChild(canvas);
+
+//This function sets the width and height attributes of the canvas element
+
+getWindowWH();
+
+//The onresize event occurs when a window or frame is resized
+
+//This is to get the width and height of the window and set the width and height of the canvas element again when the window size changes
+
+window.onresize = getWindowWH;
+
+ 
+
+//This function will get the script element that references this file,
+
+//Because the getScript function is executed once during the assignment in this file, when the html file references this file, the script label after this file has not been interpreted by the browser,
+
+//So the script element of this article is referenced at the end of the script array
+
+//The purpose of this function is to enable developers to directly modify the attributes of the script element of the file introduced into html to modify some attributes of the canvas, z-index, transparency, number of small squares and color of the canvas
+
+//With the previous code that adds canvas element to body element, when developers want to use the special effect as background, they just need to add script element in html file and reference this file
+
+function getAttr() {
+
+let scripts = document.getElementsByTagName("script"),
+
+len = scripts.length,
+
+script = scripts[len - 1];//v is the last script element, which refers to the script element of this file
+
+return {
+
+length: len,
+
+z: script.getAttribute("zIndex") || -1,
+
+opacity: script.getAttribute("opacity") || 1,
+
+color: script.getAttribute("color") || "255,255,255",
+
+count: script.getAttribute("count") || 99,
+count: script.getAttribute("height") || 99,
+count: script.getAttribute("width") || 99,
+
+}
+
+}
+
+//Get the window width and height, and set the canvas element width and height
+
+function getWindowWH() {
+
+W = canvas.width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
+
+H = canvas.height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+
+}
+
+
+
+
+
+ 
+
+//Generate small squares with random positions
+
+var random = Math.random,
+
+squares = [];//Store cubes
+
+ 
+
+//Place small squares in the squares [] array
+
+for(let p = 0; p < attr.count; p ++){
+
+var square_x = random() * W,//Abscissa
+
+square_y = random() * H,//Ordinate
+
+square_xa = 2 * random() - 1,//x-axis displacement-1,1
+
+square_ya = 2 * random() - 1;//y axis displacement
+
+squares.push({
+
+x: square_x,
+
+y: square_y,
+
+xa: square_xa,
+
+ya: square_ya,
+
+max: 6000
+
+})
+
+}
+
+ 
+
+//Generate mouse cubes
+
+var mouse = {
+
+x: null,
+
+y: null,
+
+max: 20000
+
+};
+
+//Get mouse coordinates
+
+window.onmousemove = function (i) {
+
+//i is W3C DOM and window.event is IE DOM to achieve IE compatibility
+
+//However, it seems that IE already supports W3C DOM. I use IE11, and I can realize mouse interaction by commenting on the following code,
+
+//It is said on the Internet that 7 / 8 / 9 is not supported. I have no experiment,
+
+//Of course, there's nothing wrong with that
+
+i = i || window.event;
+
+mouse.x = i.clientX;
+
+mouse.y = i.clientY;
+
+}
+
+//After the mouse moves out of the window, remove the small mouse box
+
+window.onmouseout = function () {
+
+mouse.x = null;
+
+mouse.y = null;
+
+}
+
+
+ 
+
+//Draw a small square. The small square moves (reversely when touching the boundary). The small square is bound by the mouse
+
+var animation = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (i) {
+
+window.setTimeout(i, 1000 / 45)
+
+};//Each browser supports different requestanimationframes, which are compatible with each browser
+
+ 
+
+function draw() {
+
+//Clear canvas
+
+context.clearRect(0, 0, W, H);
+
+ 
+
+var w = [mouse].concat(squares);//Connect (merge) the array of mouse cubes and other cubes
+
+var x, v, A, B, z, y;
+
+
+ 
+
+//square property sheet: x, y, xa, ya, max
+
+squares.forEach(function (i) {
+
+ 
+
+//Realize directional movement of small blocks
+
+i.x += i.xa;
+
+i.y += i.ya;
+
+ 
+
+// Control the movement direction of small square
+
+// When the small box reaches the window boundary, move backward
+
+i.xa = i.xa * (i.x > W || i.x < 0 ? -1 : 1);
+
+i.ya = i.ya * (i.y > H || i.y < 0 ? -1 : 1);
+
+ 
+
+//The first two parameters of fillRect are the x and y coordinates of the upper left corner of the rectangle, and the last two are the width and height respectively
+
+//Draw small squares
+
+context.fillRect(i.x - 1, i.y - 2, 2, 2);
+
+ 
+
+//Traverse all elements in w
+
+for (let n = 0; n < w.length; n++) {
+
+x = w[n];
+
+//If x and i are not the same object instance and the xy coordinate of X exists
+
+if (i !== x && null !== x.x && null !== x.y) {
+
+x_diff = i.x - x.x;//x coordinate difference between i and x
+
+y_diff = i.y - x.y;//y coordinate difference between i and x
+
+distance = x_diff * x_diff + y_diff * y_diff;//Oblique square
+
+if(distance < x.max){
+
+//i small square is bound by the mouse small square, that is, if the distance between i small square and the mouse small square is too large, i small square will be bound by the mouse small square,
+
+//Make multiple small squares with mouse as the center and mouse.max/2 as the radius to form a circle
+
+if(x === mouse && distance > x.max/2){
+
+i.x = i.x - 0.03 * x_diff;
+
+i.y = i.y - 0.03 * y_diff;
+
+}
+
+A = (x.max - distance) / x.max;
+
+context.beginPath();
+
+//Set the thickness of the line drawn by the brush to be related to the distance between the two small squares. The range is 0-0.5. The farther the two small squares are, the thinner the line is drawn. When it reaches max, the line will disappear
+
+context.lineWidth = A / 2;
+
+//Set the line color of the brush to s.c, that is, the canvas color, and the transparency to (A+0.2), that is, the farther the distance between the two small squares, the lighter the line
+
+context.strokeStyle = "rgba(" + attr.color + "," + (A + 1) + ")";
+
+//Set the brush stroke to i small box
+
+context.moveTo(i.x, i.y);
+
+//Move the brush stroke to the x small box
+
+context.lineTo(x.x, x.y);
+
+//Finish drawing lines, that is, drawing lines connecting small squares
+
+context.stroke();
+
+}
+
+}
+
+}
+
+//Remove i small block from w array
+
+//Prevent two small squares from connecting repeatedly
+
+w.splice(w.indexOf(i), 1);
+
+});
+
+//window.requestAnimationFrame is similar to setTimeout, forming a recursive call,
+
+//However, window.requestAnimationFrame adopts system time interval to maintain the best rendering efficiency, providing better optimization and making animation smoother
+
+//After browser optimization, the animation is more smooth;
+
+//When the window is not activated, the animation will stop, saving computing resources;
+
+animation(draw);
+
+}
+
+ 
+
+//Here, after waiting for 0.1 seconds, execute draw() once, and the real animation effect is achieved with window.requestAnimationFrame
+
+setTimeout(function () {
+
+draw();
+
+}, 100)
+
+}();
+</script> -->
+    <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+  crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+  crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+  crossorigin="anonymous"></script>
+
+</body>
+</html>

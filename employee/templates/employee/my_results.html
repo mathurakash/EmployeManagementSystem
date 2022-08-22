@@ -1,0 +1,70 @@
+{% extends 'employee/dashboard.html'%}
+
+{% block content%}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+  
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+
+<style>
+    .month{
+        border: 1px solid black !important;
+        width: -webkit-fill-available  !important;
+    }
+    tr,td,th{
+        border: 1px solid black;
+    }
+</style>
+<div class="container">
+
+    <div class="row">
+        <h3><u> My Test Results</u></h3>
+        <table id="example" class="table table table-responsive" style="width:100%">
+            <thead>
+                <th>Sno.</th>
+                <th>Name</th>
+                <th>Test Date</th>
+                <th>Subject</th>
+                <th>Total Questions</th>
+                <th>Correct</th>
+                <th>Incorrect</th>
+                <th>Percentage</th>
+                
+                
+            </thead>
+            <tbody>
+                {%for i in result%}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{i.emp}}</td>
+                        <td>{{i.userresponse.datetime}}</td>
+                        <td>{{i.userresponse.subject}}</td>
+                        <td>{{i.correct|add:i.incorrect}}</td>
+                        <td>{{i.correct}}</td>
+                        <td>{{i.incorrect}}</td>
+                        <td>{{i.percentage}}%</td>
+                        
+                        
+                    </tr>
+                {%endfor%}
+            </tbody>
+
+        </table>
+
+    </div>
+    </div>
+    <div class="col-md-3">
+        {{cal|safe}}
+    </div>
+</div>
+</div>
+
+
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
+    
+    </script>
+{%endblock%}
